@@ -4,7 +4,6 @@ var LightningVisualization = require('lightning-visualization');
 var _ = require('lodash');
 var THREE = require('three.js');
 require('three-fly-controls')(THREE);
-var $ = require('jquery');
 
 /*
  * Extend the base visualization object
@@ -23,7 +22,7 @@ var Visualization = LightningVisualization.extend({
         var renderer = new THREE.WebGLRenderer({ alpha: true});
         renderer.setSize(this.width, this.height);
 
-        $(this.selector)[0].appendChild( renderer.domElement );
+        this.el.appendChild( renderer.domElement );
 
         var camera = new THREE.PerspectiveCamera( 50, this.width / this.height, 1, 500 );
         camera.position.z = 175;
@@ -36,7 +35,7 @@ var Visualization = LightningVisualization.extend({
 
         camera.lookAt(new THREE.Vector3(0,0,175));
 
-        this.controls = new THREE.FlyControls(camera, $(this.selector)[0]);
+        this.controls = new THREE.FlyControls(camera, this.el);
         this.renderer = renderer;
         this.camera = camera;
 
